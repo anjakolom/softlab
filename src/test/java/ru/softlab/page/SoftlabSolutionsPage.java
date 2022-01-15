@@ -169,7 +169,7 @@ public class SoftlabSolutionsPage extends TestBase {
         colorText = rs_bank.getCssValue("color");
         backgroundColor = rs_bank.getCssValue("background-color");
         Assert.assertEquals(colorText,"rgba(255, 255, 255, 1)");
-        Assert.assertEquals(backgroundColor.substring(20),"rgba(75, 186, 173, 0)");
+        Assert.assertEquals(backgroundColor.substring(0,20),"rgba(75, 186, 173, 0");
     }
 
     public void mouseOver(String cssselector) {

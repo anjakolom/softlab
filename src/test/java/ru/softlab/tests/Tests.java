@@ -51,14 +51,12 @@ public class Tests extends TestBase {
     public void testSoftlabSolutionsCSS() throws Exception {
         softlabSolutionsPage = new SoftlabSolutionsPage(wd);
         softlabSolutionsPage.open();
-        softlabSolutionsPage.open();
         softlabSolutionsPage.checkColorCssRSBank();
     }
 
     @Test
     public void testSoftlabSolutionsButtonOrange() throws Exception {
         softlabSolutionsPage = new SoftlabSolutionsPage(wd);
-        softlabSolutionsPage.open();
         softlabSolutionsPage.open();
         softlabSolutionsPage.openPDF();
         softlabSolutionsPage.closeWindow();
