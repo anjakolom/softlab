@@ -32,6 +32,11 @@
             <version>1.3.9</version>
             <type>pom</type>
         </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.9.8.RC3</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -41,16 +46,10 @@
                 <version>2.20</version>
                 <configuration>
                     <argLine>
-                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/$1.9.8.RC3/aspectjweaver-$1.9.8.RC3.jar"
                     </argLine>
                 </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.aspectj</groupId>
-                        <artifactId>aspectjweaver</artifactId>
-                        <version>${aspectj.version}</version>
-                    </dependency>
-                </dependencies>
+
             </plugin>
         </plugins>
     </build>
