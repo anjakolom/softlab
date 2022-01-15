@@ -18,7 +18,7 @@ public class Tests extends TestBase {
 
     @Test
     public void testSoftlabHomePage() throws Exception {
-        softlabPage = new SotflabPage(wd);
+       /* softlabPage = new SotflabPage(wd);
         softlabPage.open();
         softlabPage.isLogoPresent();
         softlabPage.isCompanyPresent();
@@ -33,6 +33,8 @@ public class Tests extends TestBase {
         softlabPage.isInFocusPresent();
         softlabPage.isButtonSupporsPresent();
 
+        */
+        wd.get("https://www.softlab.ru/");
     }
     @Test //КАК ПРОВЕРЯТЬ ЗАГРУЗКУ КАЖДОГО ОКНА?
     public void testSoftlabSolutions() throws Exception {
