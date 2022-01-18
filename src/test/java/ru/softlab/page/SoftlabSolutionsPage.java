@@ -1,5 +1,6 @@
 package ru.softlab.page;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -19,11 +20,9 @@ public class SoftlabSolutionsPage extends TestBase {
         this.wd = wd;
     }
 
-    //проверить главную страницу! //app.get("https://www.softlab.ru/");
     private By solutions = By.linkText("https://www.softlab.ru/solutions/");
     private String solutionsTitle = "R-Style Softlab | Решения для банков";
     private String homeTitle = "R-Style Softlab | R-Style Softlab";
-
     private String catalogTitle = "";
 
     @FindBy(xpath = "//h1[contains(.,'Решения для банков')]")
@@ -72,20 +71,22 @@ public class SoftlabSolutionsPage extends TestBase {
     @FindBy(css = "#bx_1914200112_6507")
     private WebElement insurance_4;
 
-    @FindBy(xpath ="//div/strong[contains(.,'Каталог продуктов')]")
+    @FindBy(xpath = "//div/strong[contains(.,'Каталог продуктов')]")
     private WebElement katalogProduct;
 
-    @FindBy(css =".i-orange-list")
+    @FindBy(css = ".i-orange-list")
     private WebElement icon;
 
-    @FindBy(xpath ="//a[contains(.,'Посмотреть')][@class='button orange slim load']")
+    @FindBy(xpath = "//a[contains(.,'Посмотреть')][@class='button orange slim load']")
     private WebElement buttonOrange;
 
-    //Переход на текущую страницу
-    public void open(){
+    @Step("Переход на текущую страницу")
+    public void open() {
         wd.get("https://www.softlab.ru/solutions/");
+        checkWindowTitle(solutionsTitle);
     }
-    //Проверка видимости плашек в таблице "Решения для банков"
+
+    @Step("Проверка видимости плашек в таблице 'Решения для банков'")
     public void isTableRSbankPresent() {
         Assert.assertEquals(title_1.isDisplayed(), true);
         Assert.assertEquals(rs_bank_1.isDisplayed(), true);
@@ -95,10 +96,9 @@ public class SoftlabSolutionsPage extends TestBase {
         Assert.assertEquals(rs_bank_5.isDisplayed(), true);
         Assert.assertEquals(rs_bank_6.isDisplayed(), true);
         Assert.assertEquals(rs_bank_7.isDisplayed(), true);
-        //Assert.assertEquals(rs_bank_8.isDisplayed(), true);
     }
 
-    //Проверка видимости плашек в таблице "Решения для страховых компаний"
+    @Step("Проверка видимости плашек в таблице 'Решения для страховых компаний'")
     public void isTableInsurancePresent() {
         Assert.assertEquals(title_2.isDisplayed(), true);
         Assert.assertEquals(insurance_1.isDisplayed(), true);
@@ -107,37 +107,39 @@ public class SoftlabSolutionsPage extends TestBase {
         Assert.assertEquals(insurance_4.isDisplayed(), true);
     }
 
-    //Проверка видимости блока "Каталог продуктов"
+    @Step("Проверка видимости блока 'Каталог продуктов'")
     public void isKatalogProductPresent() {
         Assert.assertEquals(katalogProduct.isDisplayed(), true);
         Assert.assertEquals(icon.isDisplayed(), true);
         Assert.assertEquals(buttonOrange.isDisplayed(), true);
     }
 
-    public void openPDF(){
+    @Step("Нажатие на кнопку «Посмотреть» в блоке «Каталог продуктов». Выполнен переход к новой вкладке браузера с просмотром pdf")
+    public void openPDF() {
         String window1 = wd.getWindowHandle();
         String window2 = null;
         buttonOrange.click();
         Assert.assertEquals(wd.getTitle(), solutionsTitle);
         Set<String> currentWindows = wd.getWindowHandles();
 
-        for (String window : currentWindows){
-            if(!window.equals(window1)){
-                window2=window;
+        for (String window : currentWindows) {
+            if (!window.equals(window1)) {
+                window2 = window;
                 break;
             }
         }
         Assert.assertNotEquals(window1, window2);
         wd.switchTo().window(window2);
         checkWindowTitle(catalogTitle);
-        //Переделать на ссылку https://www.softlab.ru/upload/catalog.pdf
     }
+
+    @Step("Закрытие текущего окна")
     public void closeWindow() {
 
         String window1 = null;
         wd.close();
         Set<String> currentWindows = wd.getWindowHandles();
-        if (currentWindows.size()>0){
+        if (currentWindows.size() > 0) {
             for (String window : currentWindows) {
                 if (!window.equals(window1)) {
                     window1 = window;
@@ -147,29 +149,29 @@ public class SoftlabSolutionsPage extends TestBase {
         }
         wd.switchTo().window(window1);
         checkWindowTitle(solutionsTitle);
-
     }
 
     private void checkWindowTitle(String title) {
         Assert.assertEquals(wd.getTitle(), title);
     }
 
-    public void checkColorCssRSBank(){
-        String cssLocator ="#bx_1914200112_5021";
+    @Step("При наведении мыши плашка меняет цвет фона с белого на зеленый. Текст меняет цвет на белый")
+    public void checkColorCssRSBank() {
+        String cssLocator = "#bx_1914200112_5021";
         WebElement rs_bank = wd.findElement(By.cssSelector(cssLocator));
         checkWindowTitle(solutionsTitle);
 
         String colorText = rs_bank.getCssValue("color");
-        Assert.assertEquals(colorText,"rgba(0, 111, 102, 1)");
+        Assert.assertEquals(colorText, "rgba(0, 111, 102, 1)");
         String backgroundColor = rs_bank.getCssValue("background-color");
-        Assert.assertEquals(backgroundColor,"rgba(0, 0, 0, 0)");
+        Assert.assertEquals(backgroundColor, "rgba(0, 0, 0, 0)");
 
         mouseOver("#bx_1914200112_5021");
 
         colorText = rs_bank.getCssValue("color");
         backgroundColor = rs_bank.getCssValue("background-color");
-        Assert.assertEquals(colorText,"rgba(255, 255, 255, 1)");
-        Assert.assertEquals(backgroundColor.substring(0,20),"rgba(75, 186, 173, 0");
+        Assert.assertEquals(colorText, "rgba(255, 255, 255, 1)");
+        Assert.assertEquals(backgroundColor.substring(0, 20), "rgba(75, 186, 173, 0");
     }
 
     public void mouseOver(String cssselector) {
@@ -178,16 +180,17 @@ public class SoftlabSolutionsPage extends TestBase {
                 wd.findElement(By
                         .cssSelector(cssselector)))
                 .build().perform();
-
     }
 
+    @Step("Клик по логотипу ")
     public void checkLogo() {
         logotip.click();
         checkWindowTitle(homeTitle);
     }
 
+    @Step("Проверка активности кнопки 'Посмотреть' ")
     public void checkButtonOrange() {
-        Assert.assertEquals(buttonOrange.isEnabled(),true);
+        Assert.assertEquals(buttonOrange.isEnabled(), true);
     }
 
 }

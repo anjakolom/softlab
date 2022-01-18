@@ -1,7 +1,6 @@
 package ru.softlab.page;
 
 import io.qameta.allure.Step;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -17,8 +16,8 @@ public class SotflabPage extends TestBase {
         this.wd = wd;
     }
 
-
-    private By homePage = By.linkText("https://www.softlab.ru/");
+    //private By homePage = By.linkText("https://www.softlab.ru/");
+    private String homeTitle = "R-Style Softlab | R-Style Softlab";
 
     @FindBy(css = ".logo")
     private WebElement logotip;
@@ -60,8 +59,9 @@ public class SotflabPage extends TestBase {
     private WebElement slide;
 
     @Step("Вход на сайт https://www.softlab.ru/")
-    public void open(){
+    public void open() {
         wd.get("https://www.softlab.ru/");
+        checkWindowTitle(homeTitle);
     }
 
     @Step("Присутствует логотип")
@@ -79,45 +79,65 @@ public class SotflabPage extends TestBase {
         Assert.assertEquals(solutions.isDisplayed(), true);
     }
 
+    @Step("Присутствует меню 'Услуги' ")
     public void isServicesPresent() {
         Assert.assertEquals(services.isDisplayed(), true);
     }
 
+    @Step("Присутствует меню 'Мероприятия' ")
     public void isEventsPresent() {
         Assert.assertEquals(events.isDisplayed(), true);
     }
 
+    @Step("Присутствует меню 'Пресс-центр' ")
     public void isPressPresent() {
         Assert.assertEquals(press.isDisplayed(), true);
     }
 
+    @Step("Присутствует меню 'Карьера' ")
     public void isCareerPresent() {
         Assert.assertEquals(career.isDisplayed(), true);
     }
 
+    @Step("Присутствует меню 'Блог' ")
     public void isBlogPresent() {
         Assert.assertEquals(blog.isDisplayed(), true);
     }
 
+    @Step("Присутствует кнопка 'Поддержка' ")
     public void isButtonSupporsPresent() {
         Assert.assertEquals(buttonSupport.isDisplayed(), true);
     }
+
+    @Step("Присутствует поле 'Поиск' ")
     public void isSearchPresent() {
         Assert.assertEquals(search.isDisplayed(), true);
     }
 
+    @Step("Присутствует лента 'Новости и события' ")
     public void isNewsListPresent() {
         Assert.assertEquals(newList.isDisplayed(), true);
     }
 
+    @Step("Присутствует лента 'История успеха'")
     public void isInFocusPresent() {
         Assert.assertEquals(inFocus.isDisplayed(), true);
     }
+
+    @Step("Присутствует карусель")
+    public void isSlidePresent() {
+        Assert.assertEquals(slide.isDisplayed(), true);
+    }
+
+    @Step("Клик по кнопке 'Поддержка' ")
     public void clickButtonSolutions() {
         solutions.click();
 
     }
 
+    private void checkWindowTitle(String title) {
+        Assert.assertEquals(wd.getTitle(), title);
+    }
 
 
 }
