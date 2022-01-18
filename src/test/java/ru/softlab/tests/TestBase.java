@@ -43,8 +43,11 @@ public class TestBase {
             wd = new InternetExplorerDriver();
         }*/
         System.setProperty("webdriver.chrome.driver", "C:\\Tools\\chromedriver.exe");
-        //wd = new FirefoxDriver();
         wd = new ChromeDriver();
+
+       // wd = new FirefoxDriver();
+        //System.setProperty("webdriver.geckodriver.driver", "C:\\Windows\\System32\\geckodriver.exe");
+
         wd.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         //wd.get(properties.getProperty("web.baseUrl"));
     }

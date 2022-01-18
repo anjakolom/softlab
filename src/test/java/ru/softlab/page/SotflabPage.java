@@ -1,5 +1,6 @@
 package ru.softlab.page;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,7 +16,6 @@ public class SotflabPage extends TestBase {
         PageFactory.initElements(wd, this);
         this.wd = wd;
     }
-
 
 
     private By homePage = By.linkText("https://www.softlab.ru/");
@@ -59,17 +59,22 @@ public class SotflabPage extends TestBase {
     @FindBy(css = "li.bjqs-slide:nth-child(1)")
     private WebElement slide;
 
+    @Step("Вход на сайт https://www.softlab.ru/")
     public void open(){
         wd.get("https://www.softlab.ru/");
     }
+
+    @Step("Присутствует логотип")
     public void isLogoPresent() {
         Assert.assertEquals(logotip.isDisplayed(), true);
     }
 
+    @Step("Присутствует меню 'О компании' ")
     public void isCompanyPresent() {
         Assert.assertEquals(company.isDisplayed(), true);
     }
 
+    @Step("Присутствует меню 'Решения' ")
     public void isSolutionsPresent() {
         Assert.assertEquals(solutions.isDisplayed(), true);
     }
