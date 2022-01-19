@@ -81,6 +81,7 @@ public class Tests extends TestBase {
         softlabPage.isNewsListPresent();
         softlabPage.isInFocusPresent();
         softlabPage.isButtonSupporsPresent();
+        softlabPage.isSlidePresent();
     }
 
 
