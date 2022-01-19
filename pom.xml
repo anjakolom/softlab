@@ -31,7 +31,7 @@
                     <systemProperties>
                         <property>
                             <name>allure.results.directory</name>
-                            <value>C:\Users\Artem\.jenkins\workspace\softlab\allure-results</value>
+                            <value>${basedir}\allure-results</value>
                         </property>
                     </systemProperties>
 
