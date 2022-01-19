@@ -16,7 +16,6 @@ public class SotflabPage extends TestBase {
         this.wd = wd;
     }
 
-    //private By homePage = By.linkText("https://www.softlab.ru/");
     private String homeTitle = "R-Style Softlab | R-Style Softlab";
 
     @FindBy(css = ".logo")
